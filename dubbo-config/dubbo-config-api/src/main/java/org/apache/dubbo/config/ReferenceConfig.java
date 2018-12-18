@@ -153,12 +153,14 @@ public class ReferenceConfig<T> extends AbstractReferenceConfig {
             return;
         }
         initialized = true;
+        // 非空校验
         if (interfaceName == null || interfaceName.length() == 0) {
             throw new IllegalStateException("<dubbo:reference interface=\"\" /> interface not allow null!");
         }
         // get consumer's global configuration
         checkDefault();
         appendProperties(this);
+        // 如果generic为空，使用ConsumerConfig的generic值
         if (getGeneric() == null && getConsumer() != null) {
             setGeneric(getConsumer().getGeneric());
         }
@@ -207,7 +209,8 @@ public class ReferenceConfig<T> extends AbstractReferenceConfig {
             url = resolve;
             if (logger.isWarnEnabled()) {
                 if (resolveFile != null) {
-                    logger.warn("Using default dubbo resolve file " + resolveFile + " replace " + interfaceName + "" + resolve + " to p2p invoke remote service.");
+                    logger.warn("Using default dubbo resolve file " + resolveFile + " replace "
+                            + interfaceName + "" + resolve + " to p2p invoke remote service.");
                 } else {
                     logger.warn("Using -D" + interfaceName + "=" + resolve + " to p2p invoke remote service.");
                 }

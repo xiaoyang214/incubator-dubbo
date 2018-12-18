@@ -227,7 +227,8 @@ public class ConfigUtils {
                     input.close();
                 }
             } catch (Throwable e) {
-                logger.warn("Failed to load " + fileName + " file from " + fileName + "(ignore this file): " + e.getMessage(), e);
+                logger.warn("Failed to load " + fileName + " file from " + fileName
+                        + "(ignore this file): " + e.getMessage(), e);
             }
             return properties;
         }
